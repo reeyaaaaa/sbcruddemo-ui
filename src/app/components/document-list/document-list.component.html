@@ -1,0 +1,6 @@
+<ul *ngIf="documents && documents.length > 0">
+  <li *ngFor="let doc of documents">
+    📄 {{ doc.documentName }} ({{ doc.documentType }})
+  </li>
+</ul>
+<span *ngIf="!documents || documents.length === 0">No documents.</span>

@@ -1,0 +1,8 @@
+<div *ngIf="addresses.length > 0; else noAddress">  <div *ngFor="let address of addresses">
+    🏠 {{ address.street }}, {{ address.city }}, {{ address.state }} - {{ address.zipCode }}
+  </div>
+</div>
+
+<ng-template #noAddress>
+  <p>No address available.</p>
+</ng-template>

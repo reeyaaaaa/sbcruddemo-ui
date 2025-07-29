@@ -1,0 +1,15 @@
+<div *ngFor="let profile of profiles" class="profile-card">
+  <div class="role">
+    🧾 <app-document-list [documents]="profile.documents"></app-document-list>
+  </div>
+
+  <div class="section">
+    📄 Documents:
+    <app-document-list [documents]="profile.documents"></app-document-list>
+  </div>
+
+  <div class="section">
+    🏆 Competitions:
+    <app-competition-list [competitions]="profile.competitions"></app-competition-list>
+  </div>
+</div>

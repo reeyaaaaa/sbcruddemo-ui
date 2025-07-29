@@ -1,0 +1,6 @@
+<ul *ngIf="competitions && competitions.length > 0">
+  <li *ngFor="let comp of competitions">
+    🏆 {{ comp.competitionName }}
+  </li>
+</ul>
+<span *ngIf="!competitions || competitions.length === 0">No competitions.</span>
