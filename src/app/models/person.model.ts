@@ -10,4 +10,5 @@ export interface Person {
   contactList: Contact[];
   addressList: Address[];
   personProfiles: PersonProfile[];
+  createdAt?: Date;
 }

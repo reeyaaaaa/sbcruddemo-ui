@@ -7,12 +7,15 @@ import { Person } from '../models/person.model';
   providedIn: 'root'
 })
 export class PersonService {
+  getRoles() {
+    throw new Error('Method not implemented.');
+  }
   private baseUrl = 'http://localhost:8080/api/persons';
 
   constructor(private http: HttpClient) {}
 
   getAllPersons(): Observable<Person[]> {
-  return this.http.get<Person[]>('http://localhost:8080/api/persons/all'); // <-- use this!
+  return this.http.get<Person[]>('http://localhost:8080/api/persons/all');
   }
 
 
