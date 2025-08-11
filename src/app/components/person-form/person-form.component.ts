@@ -149,7 +149,8 @@ export class PersonFormComponent implements OnInit {
   // Replace profile_type.id with full object
   const profiles = formValue.profiles.map((profile: any) => ({
     ...profile,
-    profile_type: {
+    profile_type: 
+    {
       id: profile.profile_type.id
     },
     documents: profile.documents,
@@ -162,6 +163,7 @@ export class PersonFormComponent implements OnInit {
     email: formValue.email,
     education: formValue.education,
     password: formValue.password,
+    status: formValue.status,
     contactList: formValue.contacts,
     addressList: formValue.addresses,
     personProfiles: profiles

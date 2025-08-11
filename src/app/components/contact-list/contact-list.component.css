@@ -1,4 +1,21 @@
-.contact-card {
-  margin-bottom: 10px;
-  background-color: #f3f4f6;
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.contact-icon {
+  font-size: 18px;
+  color: #555;
+}
+
+.empty-text {
+  font-style: italic;
+  color: #888;
 }

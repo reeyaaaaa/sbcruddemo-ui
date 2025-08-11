@@ -1,6 +1,9 @@
-<ul *ngIf="competitions && competitions.length > 0">
-  <li *ngFor="let comp of competitions">
-    🏆 {{ comp.competitionName }}
-  </li>
-</ul>
-<span *ngIf="!competitions || competitions.length === 0">No competitions.</span>
+<div *ngIf="competitions?.length; else noCompetitions">
+  <span *ngFor="let comp of competitions; let i = index">
+    {{ comp.name || comp.competitionName }}
+    <span *ngIf="i < competitions.length - 1">, </span>
+  </span>
+</div>
+<ng-template #noCompetitions>
+  <span>No competitions.</span>
+</ng-template>

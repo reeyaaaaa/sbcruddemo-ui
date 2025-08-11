@@ -1,9 +1,10 @@
-<div *ngIf="contacts.length > 0">
-  <mat-card *ngFor="let contact of contacts" class="contact-card">
-    <mat-card-title>{{ contact.type }}</mat-card-title>
-    <mat-card-content>{{ contact.value }}</mat-card-content>
-  </mat-card>
+<div class="contact-list" *ngIf="contacts && contacts.length; else noContacts">
+  <div *ngFor="let contact of contacts" class="contact-item">
+    <mat-icon class="contact-icon">phone</mat-icon>
+    <span><strong>{{ contact.type }}:</strong> {{ contact.value }}</span>
+  </div>
 </div>
-<div *ngIf="contacts?.length === 0">
-  <p>No contacts available.</p>
-</div>
+
+<ng-template #noContacts>
+  <span class="empty-text">No contacts</span>
+</ng-template>

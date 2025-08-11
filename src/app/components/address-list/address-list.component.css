@@ -1,4 +1,16 @@
-div {
-  margin-bottom: 4px;
+.address-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.address-card {
+  padding: 8px;
+}
+
+mat-card-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-size: 14px;
 }
