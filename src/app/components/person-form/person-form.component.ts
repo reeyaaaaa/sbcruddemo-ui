@@ -138,7 +138,7 @@ export class PersonFormComponent implements OnInit {
   }
 
   // Submit
- onSubmit() {
+onSubmit() {
   if (this.personForm.invalid) {
     this.personForm.markAllAsTouched();
     return;
@@ -149,8 +149,7 @@ export class PersonFormComponent implements OnInit {
   // Replace profile_type.id with full object
   const profiles = formValue.profiles.map((profile: any) => ({
     ...profile,
-    profile_type: 
-    {
+    profile_type: {
       id: profile.profile_type.id
     },
     documents: profile.documents,
@@ -172,13 +171,15 @@ export class PersonFormComponent implements OnInit {
   this.personService.savePerson(payload).subscribe({
     next: (res) => {
       console.log('Saved!', res);
+      alert('✅ Person saved successfully!');
       this.router.navigate(['/persons']);
     },
     error: (err) => {
       console.error('Error occurred', err);
-      alert('Something went wrong while saving!');
+      alert('❌ Something went wrong while saving!');
     }
   });
 }
+
 
 }

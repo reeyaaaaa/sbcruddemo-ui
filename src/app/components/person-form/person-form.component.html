@@ -1,16 +1,21 @@
 <form class="form-container" [formGroup]="personForm" (ngSubmit)="onSubmit()" autocomplete="off">
   <h2>Person Details</h2>
 
+  <!-- BASIC INFORMATION -->
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>First Name</mat-label>
     <input matInput formControlName="firstname" required />
-    <mat-error *ngIf="personForm.get('firstname')?.hasError('required')">Name is required !!</mat-error>
+    <mat-error *ngIf="personForm.get('firstname')?.hasError('required')">
+      Name is required !!
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Last Name</mat-label>
     <input matInput formControlName="lastname" required />
-    <mat-error *ngIf="personForm.get('lastname')?.hasError('required')">Last name is required !!</mat-error>
+    <mat-error *ngIf="personForm.get('lastname')?.hasError('required')">
+      Last name is required !!
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="full-width">
@@ -23,16 +28,19 @@
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Education</mat-label>
     <input matInput formControlName="education" required />
-    <mat-error *ngIf="personForm.get('education')?.hasError('required')">Education is required !!</mat-error>
+    <mat-error *ngIf="personForm.get('education')?.hasError('required')">
+      Education is required !!
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Password</mat-label>
-<input matInput type="password" formControlName="password" required autocomplete="current-password">
+    <input matInput type="password" formControlName="password" required autocomplete="current-password" />
     <mat-error *ngIf="personForm.get('password')?.hasError('required')">Password is required !!</mat-error>
     <mat-error *ngIf="personForm.get('password')?.hasError('minlength')">Min 6 characters required !!</mat-error>
   </mat-form-field>
 
+  <!-- STATUS & DATE -->
   <mat-form-field appearance="fill">
     <mat-label>Status</mat-label>
     <mat-select formControlName="status">
@@ -48,128 +56,105 @@
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
-<!-- CONTACTS -->
-<div formArrayName="contacts">
-  <div *ngFor="let contact of contacts.controls; let i = index" [formGroupName]="i" class="contact-item">
+  <!-- CONTACTS -->
+  <h3>Contacts</h3>
+  <div formArrayName="contacts">
+    <div *ngFor="let contact of contacts.controls; let i = index" [formGroupName]="i" class="contact-item">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Contact Number</mat-label>
+        <input matInput formControlName="value" maxlength="10" />
+        <mat-error *ngIf="contact.get('value')?.touched && contact.get('value')?.hasError('required')">
+          Contact Number is required
+        </mat-error>
+      </mat-form-field>
 
-    <!-- Contact Value -->
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Contact Number</mat-label>
-      <input matInput formControlName="value" maxlength="10" />
-      <mat-error *ngIf="contact.get('value')?.touched && contact.get('value')?.hasError('required')">
-        Contact Number is required
-      </mat-error>
-    </mat-form-field>
-
-    <!-- Contact Type -->
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Type</mat-label>
-      <mat-select formControlName="type">
-        <mat-option value="mobile">Mobile</mat-option>
-        <mat-option value="home">Home</mat-option>
-        <mat-option value="work">Work</mat-option>
-      </mat-select>
-      <mat-error *ngIf="contact.get('type')?.touched && contact.get('type')?.hasError('required')">
-        Contact Type is required
-      </mat-error>
-    </mat-form-field>
-
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Type</mat-label>
+        <mat-select formControlName="type">
+          <mat-option value="mobile">Mobile</mat-option>
+          <mat-option value="home">Home</mat-option>
+          <mat-option value="work">Work</mat-option>
+        </mat-select>
+        <mat-error *ngIf="contact.get('type')?.touched && contact.get('type')?.hasError('required')">
+          Contact Type is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <button mat-stroked-button color="primary" type="button" (click)="addContact()">+ Add Contact</button>
   </div>
-
-  <button mat-stroked-button color="primary" type="button" (click)="addContact()">+ Add Contact</button>
-</div>
-
 
   <!-- ADDRESSES -->
-<div formArrayName="addresses">
-  <div *ngFor="let address of addresses.controls; let i = index" [formGroupName]="i">
-    <mat-form-field appearance="fill">
-      <mat-label>City</mat-label>
-      <input matInput formControlName="city" />
-      <mat-error *ngIf="address.get('city')?.touched && address.get('city')?.hasError('required')">
-        City is required
-      </mat-error>
-    </mat-form-field>
+  <h3>Addresses</h3>
+  <div formArrayName="addresses">
+    <div *ngFor="let address of addresses.controls; let i = index" [formGroupName]="i">
+      <mat-form-field appearance="fill">
+        <mat-label>City</mat-label>
+        <input matInput formControlName="city" />
+        <mat-error *ngIf="address.get('city')?.touched && address.get('city')?.hasError('required')">
+          City is required
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>State</mat-label>
-      <input matInput formControlName="state" />
-      <mat-error *ngIf="address.get('state')?.touched && address.get('state')?.hasError('required')">
-        State is required
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>State</mat-label>
+        <input matInput formControlName="state" />
+        <mat-error *ngIf="address.get('state')?.touched && address.get('state')?.hasError('required')">
+          State is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <button mat-stroked-button color="primary" type="button" (click)="addAddress()">+ Add Address</button>
   </div>
-  <button mat-stroked-button color="primary" type="button" (click)="addAddress()">+ Add Address</button>
-</div>
-
 
   <!-- PROFILES -->
+  <h3>Profiles</h3>
   <div formArrayName="profiles">
-
-  <div *ngFor="let profile of profiles.controls; let pi = index" [formGroupName]="pi">
-
-    <!-- Profile Type Select -->
-    <div [formGroupName]="'profile_type'">
-      <mat-form-field appearance="fill">
+    <div *ngFor="let profile of profiles.controls; let pi = index" [formGroupName]="pi">
+      
+      <!-- Profile Type -->
+      <mat-form-field appearance="fill" formGroupName="profile_type">
         <mat-label>Profile Type</mat-label>
         <mat-select formControlName="id">
           <mat-option *ngFor="let type of profileTypes" [value]="type.id">{{ type.name }}</mat-option>
         </mat-select>
-        <mat-error *ngIf="profile.get('profile_type.id')?.touched && profile.get('profile_type.id')?.hasError('required')">
-          Profile Type is required
-        </mat-error>
       </mat-form-field>
-    </div>
 
       <!-- DOCUMENTS -->
-    <div formArrayName="documents">
-      <div *ngFor="let doc of getDocuments(pi).controls; let di = index" [formGroupName]="di">
-        <mat-form-field appearance="fill">
-          <mat-label>Document Name</mat-label>
-          <input matInput formControlName="name" />
-          <mat-error *ngIf="doc.get('name')?.touched && doc.get('name')?.hasError('required')">
-            Document Name is required
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>URL</mat-label>
-          <input matInput formControlName="url" />
-          <mat-error *ngIf="doc.get('url')?.touched && doc.get('url')?.hasError('required')">
-            URL is required
-          </mat-error>
-        </mat-form-field>
+      <h4>Documents</h4>
+      <div formArrayName="documents">
+        <div *ngFor="let doc of getDocuments(pi).controls; let di = index" [formGroupName]="di">
+          <mat-form-field appearance="fill">
+            <mat-label>Document Name</mat-label>
+            <input matInput formControlName="name" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>URL</mat-label>
+            <input matInput formControlName="url" />
+          </mat-form-field>
+        </div>
+        <button mat-stroked-button color="primary" type="button" (click)="addDocument(pi)">+ Add Document</button>
       </div>
-      <button mat-stroked-button color="primary" type="button" (click)="addDocument(pi)">+ Add Document</button>
-    </div>
 
       <!-- COMPETITIONS -->
+      <h4>Competitions</h4>
       <div formArrayName="competitions">
-  <div *ngFor="let comp of getCompetitions(pi).controls; let ci = index" [formGroupName]="ci">
-    <mat-form-field appearance="fill">
-      <mat-label>Competition Name</mat-label>
-      <input matInput formControlName="name" />
-      <mat-error *ngIf="comp.get('name')?.touched && comp.get('name')?.hasError('required')">
-        Competition Name is required
-      </mat-error>
-    </mat-form-field>
+        <div *ngFor="let comp of getCompetitions(pi).controls; let ci = index" [formGroupName]="ci">
+          <mat-form-field appearance="fill">
+            <mat-label>Competition Name</mat-label>
+            <input matInput formControlName="name" />
+          </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Level</mat-label>
-      <input matInput formControlName="level" />
-      <mat-error *ngIf="comp.get('level')?.touched && comp.get('level')?.hasError('required')">
-        Level is required
-      </mat-error>
-    </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Level</mat-label>
+            <input matInput formControlName="level" />
+          </mat-form-field>
+        </div>
+        <button mat-stroked-button color="primary" type="button" (click)="addCompetition(pi)">+ Add Competition</button>
+      </div>
+    </div>
+    <button mat-raised-button color="primary" type="button" (click)="addProfile()">+ Add Profile</button>
   </div>
-
-  <button mat-stroked-button color="primary" type="button" (click)="addCompetition(pi)">+ Add Competition</button>
-</div>
-
-</div>
-  <button mat-raised-button color="primary" (click)="addProfile()">+ Add Profile</button>
-</div>
 
   <!-- SUBMIT -->
   <button mat-raised-button color="primary" type="submit">Submit</button>
 </form>
-
