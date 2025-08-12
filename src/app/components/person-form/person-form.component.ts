@@ -33,7 +33,7 @@ export class PersonFormComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       status: [' '],
-      created_at: ['', Validators.required], // Matches formControlName in HTML
+      created_at: ['', Validators.required],
       education: ['', Validators.required],
       contacts: this.fb.array([
     this.fb.group({
