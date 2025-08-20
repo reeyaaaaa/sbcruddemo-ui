@@ -1,4 +1,4 @@
-<div *ngIf="competitions?.length; else noCompetitions">
+<!-- <div *ngIf="competitions?.length; else noCompetitions">
   <span *ngFor="let comp of competitions; let i = index">
     {{ comp.name || comp.competitionName }}
     <span *ngIf="i < competitions.length - 1">, </span>
@@ -6,4 +6,17 @@
 </div>
 <ng-template #noCompetitions>
   <span>No competitions.</span>
+</ng-template> -->
+
+
+<div *ngIf="competitions?.length; else noCompetitions">
+  <ng-container *ngFor="let comp of competitions; let i = index">
+    <app-competition [competition]="comp"></app-competition>
+    <span *ngIf="i < competitions.length - 1">, </span>
+  </ng-container>
+</div>
+
+<ng-template #noCompetitions>
+  <span>No competitions.</span>
 </ng-template>
+

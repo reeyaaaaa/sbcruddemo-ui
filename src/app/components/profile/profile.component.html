@@ -1,0 +1,23 @@
+<div class="profile-card">
+
+  <!-- Role Section -->
+  <div class="section">
+    <mat-icon>badge</mat-icon>
+    <strong>Role:</strong> {{ profile.profileType.name }}
+  </div>
+
+  <!-- Documents Section -->
+  <div class="section" *ngIf="profile.documents?.length">
+    <mat-icon>description</mat-icon>
+    <strong>Documents:</strong>
+    <app-document-list [documents]="profile.documents"></app-document-list>
+  </div>
+
+  <!-- Competitions Section -->
+  <div class="section" *ngIf="profile.competitions?.length">
+    <mat-icon>emoji_events</mat-icon>
+    <strong>Competitions:</strong>
+    <app-competition-list [competitions]="profile.competitions"></app-competition-list>
+  </div>
+
+</div>

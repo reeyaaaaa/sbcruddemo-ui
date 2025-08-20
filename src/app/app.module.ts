@@ -25,6 +25,11 @@ import { AddressListComponent } from './components/address-list/address-list.com
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DocumentComponent } from './components/document/document.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { AddressComponent } from './components/address/address.component';
+import { CompetitionComponent } from './components/competition/competition.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'persons', pathMatch: 'full' },
@@ -38,11 +43,16 @@ const routes: Routes = [
     AppComponent,
     PersonFormComponent,
     PersonListComponent,
-    ProfileListComponent,      // ✅ Move these here
+    ProfileListComponent,     
     DocumentListComponent,
     CompetitionListComponent,
    ContactListComponent,
-   AddressListComponent
+   AddressListComponent,
+   DocumentComponent,
+   ContactComponent,
+   AddressComponent,
+   CompetitionComponent,
+   ProfileComponent
   ],
   imports: [
     BrowserModule,

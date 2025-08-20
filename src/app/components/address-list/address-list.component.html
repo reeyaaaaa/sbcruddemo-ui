@@ -1,4 +1,4 @@
-<div class="address-list" *ngIf="addresses && addresses.length; else noAddresses">
+<!-- <div class="address-list" *ngIf="addresses && addresses.length; else noAddresses">
   <mat-card class="address-card" *ngFor="let addr of addresses">
     <mat-card-title>
       <mat-icon>home</mat-icon> Address
@@ -7,6 +7,15 @@
       {{ addr.street ? addr.street + ', ' : '' }}{{ addr.city }}, {{ addr.state }} 
     </mat-card-content>
   </mat-card>
+</div>
+
+<ng-template #noAddresses>
+  <span class="empty-text">No addresses</span>
+</ng-template> -->
+
+
+<div class="address-list" *ngIf="addresses && addresses.length; else noAddresses">
+  <app-address *ngFor="let addr of addresses" [address]="addr"></app-address>
 </div>
 
 <ng-template #noAddresses>

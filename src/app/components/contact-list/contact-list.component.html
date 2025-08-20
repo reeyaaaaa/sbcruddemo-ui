@@ -1,8 +1,17 @@
-<div class="contact-list" *ngIf="contacts && contacts.length; else noContacts">
+<!-- <div class="contact-list" *ngIf="contacts && contacts.length; else noContacts">
   <div *ngFor="let contact of contacts" class="contact-item">
     <mat-icon class="contact-icon">phone</mat-icon>
     <span><strong>{{ contact.type }}:</strong> {{ contact.value }}</span>
   </div>
+</div>
+
+<ng-template #noContacts>
+  <span class="empty-text">No contacts</span>
+</ng-template> -->
+
+
+<div class="contact-list" *ngIf="contacts && contacts.length; else noContacts">
+  <app-contact *ngFor="let contact of contacts" [contact]="contact"></app-contact>
 </div>
 
 <ng-template #noContacts>

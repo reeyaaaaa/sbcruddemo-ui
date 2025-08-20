@@ -1,0 +1,8 @@
+<mat-card class="address-card">
+  <mat-card-title>
+    <mat-icon>home</mat-icon> Address
+  </mat-card-title>
+  <mat-card-content>
+    {{ address.street ? address.street + ', ' : '' }}{{ address.city }}, {{ address.state }}
+  </mat-card-content>
+</mat-card>

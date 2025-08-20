@@ -9,6 +9,6 @@ export interface Person {
   email: string;
   contactList: Contact[];
   addressList: Address[];
-  personProfiles: PersonProfile[];
+profiles: PersonProfile[];
   createdAt?: Date;
 }

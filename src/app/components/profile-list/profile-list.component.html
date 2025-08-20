@@ -1,24 +1,12 @@
 <div *ngIf="profiles?.length; else noProfiles">
-  <div *ngFor="let profile of profiles" class="profile-card">
-
-    <!-- Documents Section -->
-    <div class="section">
-      <mat-icon>description</mat-icon>
-      <strong>Documents:</strong>
-      <app-document-list [documents]="profile.documents"></app-document-list>
-    </div>
-
-    <!-- Competitions Section -->
-    <div class="section">
-      <mat-icon>emoji_events</mat-icon>
-      <strong>Competitions:</strong>
-      <app-competition-list [competitions]="profile.competitions"></app-competition-list>
-    </div>
-
-  </div>
+  <ng-container *ngFor="let profile of profiles; let i = index">
+    <app-profile [profile]="profile"></app-profile>
+    <!-- optional separator between profiles -->
+    <span *ngIf="i < profiles.length - 1"> | </span>
+  </ng-container>
 </div>
 
-<!-- Fallback when no profiles -->
+
 <ng-template #noProfiles>
   <span class="empty-text">No profiles available</span>
 </ng-template>
