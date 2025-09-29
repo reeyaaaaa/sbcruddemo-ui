@@ -4,7 +4,7 @@ import { Role } from './role.model';
 
 export interface PersonProfile {
   id: number;
-  profileType: Role;
-  documents: Document[];
+  profile_type: Role;   // backend uses snake_case
+  document: Document[]; // backend uses "document"
   competitions: Competition[];
 }

@@ -7,8 +7,11 @@ export interface Person {
   firstname: string;
   lastname: string;
   email: string;
+  education?: string;
+  password?: string;
+  status?: string;
+  createdAt?: Date;
   contactList: Contact[];
   addressList: Address[];
-profiles: PersonProfile[];
-  createdAt?: Date;
+  personProfiles: PersonProfile[];  // ✅ must match backend JSON
 }

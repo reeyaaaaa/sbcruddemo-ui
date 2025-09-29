@@ -1,17 +1,47 @@
+/* Profile Card - compact version */
 .profile-card {
-  border: 1px solid #e0e0e0;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 4px;
-  background-color: #f9f9f9;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  padding: 8px 12px;   /* reduced padding */
+  margin-bottom: 8px; /* less spacing */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.role {
-  font-weight: bold;
-  margin-bottom: 5px;
+.profile-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
 }
 
-.section {
-  margin-left: 15px;
+/* Role text */
+.profile-card p {
+  margin: 0 0 6px;  /* smaller gap */
+  font-size: 13px;  /* smaller font */
+  color: #333;
 }
 
+/* Section Titles (Competitions, Documents) */
+.profile-card strong {
+  color: #444;
+  font-size: 13px; /* reduced font size */
+}
+
+/* Competitions and Documents Containers */
+.profile-card app-competition-list,
+.profile-card app-document-list,
+.profile-card app-competition,
+.profile-card app-document {
+  display: block;
+  margin-top: 4px;   /* tighter spacing */
+  padding: 5px 8px;  /* reduced padding */
+  border-left: 3px solid #1976d2;
+  background: #f9f9f9;
+  border-radius: 5px;
+  font-size: 14px;   /* smaller inside text */
+}
+
+/* Align multiple child lists nicely */
+.profile-card app-competition-list,
+.profile-card app-document-list {
+  margin-bottom: 6px; /* smaller gap */
+}

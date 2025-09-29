@@ -1,5 +1,5 @@
 export interface Competition {
   id: number;
-  name?: string;
-  competitionName: string;
+  name: string;
+  level: string;
 }

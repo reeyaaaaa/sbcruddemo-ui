@@ -1,12 +1,16 @@
 <form class="form-container" [formGroup]="personForm" (ngSubmit)="onSubmit()" autocomplete="off">
-  <h2>Person Details</h2>
+  <!-- Title -->
+  <h2 *ngIf="mode === 'register'" class="form-title">Register</h2>
+  <h2 *ngIf="mode === 'full'" class="form-title">Person Details</h2>
+  <h2 *ngIf="mode === 'profileCompletion'" class="form-title">Complete Your Profile</h2>
 
-  <!-- BASIC INFORMATION -->
+
+  <!-- BASIC INFORMATION (always visible) -->
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>First Name</mat-label>
     <input matInput formControlName="firstname" required />
     <mat-error *ngIf="personForm.get('firstname')?.hasError('required')">
-      Name is required !!
+      First name is required !!
     </mat-error>
   </mat-form-field>
 
@@ -18,143 +22,144 @@
     </mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Email</mat-label>
-    <input matInput formControlName="email" required autocomplete="username" />
-    <mat-error *ngIf="personForm.get('email')?.hasError('required')">Email is required !!</mat-error>
-    <mat-error *ngIf="personForm.get('email')?.hasError('email')">Please enter a valid email !!</mat-error>
-  </mat-form-field>
+  <!-- Email -->
+<mat-form-field appearance="outline" class="full-width">
+  <mat-label>Email</mat-label>
+  <input matInput formControlName="email" required autocomplete="username" />
+  <mat-error *ngIf="personForm.get('email')?.hasError('required')">Email is required !!</mat-error>
+  <mat-error *ngIf="personForm.get('email')?.hasError('email')">Please enter a valid email !!</mat-error>
+</mat-form-field>
 
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Education</mat-label>
-    <input matInput formControlName="education" required />
-    <mat-error *ngIf="personForm.get('education')?.hasError('required')">
-      Education is required !!
-    </mat-error>
-  </mat-form-field>
+<!-- Password -->
+<mat-form-field appearance="outline" class="full-width">
+  <mat-label>Password</mat-label>
+  <input 
+    matInput 
+    type="password" 
+    formControlName="password" 
+    required 
+    autocomplete="new-password"/>   <!-- 👈 change here -->
+  <mat-error *ngIf="personForm.get('password')?.hasError('required')">Password is required !!</mat-error>
+  <mat-error *ngIf="personForm.get('password')?.hasError('minlength')">Min 6 characters required !!</mat-error>
+</mat-form-field>
 
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Password</mat-label>
-    <input matInput type="password" formControlName="password" required autocomplete="current-password" />
-    <mat-error *ngIf="personForm.get('password')?.hasError('required')">Password is required !!</mat-error>
-    <mat-error *ngIf="personForm.get('password')?.hasError('minlength')">Min 6 characters required !!</mat-error>
-  </mat-form-field>
 
-  <!-- STATUS & DATE -->
-  <mat-form-field appearance="fill">
-    <mat-label>Status</mat-label>
-    <mat-select formControlName="status">
-      <mat-option value="active">Active</mat-option>
-      <mat-option value="inactive">Inactive</mat-option>
-    </mat-select>
-  </mat-form-field>
+  <!-- ADVANCED FIELDS: only show in FULL mode -->
+<div *ngIf="mode === 'full' || mode === 'profileCompletion'">
 
-  <mat-form-field appearance="fill">
-    <mat-label>Created At</mat-label>
-    <input matInput [matDatepicker]="picker" formControlName="created_at" required />
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+    <!-- Education -->
+    <mat-form-field appearance="outline" class="full-width">
+  <mat-label>Education</mat-label>
+  <input matInput formControlName="education" />
+  <mat-error *ngIf="personForm.get('education')?.hasError('required')">
+    Education is required !!
+  </mat-error>
+</mat-form-field>
 
-  <!-- CONTACTS -->
-  <h3>Contacts</h3>
-  <div formArrayName="contacts">
-    <div *ngFor="let contact of contacts.controls; let i = index" [formGroupName]="i" class="contact-item">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Contact Number</mat-label>
-        <input matInput formControlName="value" maxlength="10" />
-        <mat-error *ngIf="contact.get('value')?.touched && contact.get('value')?.hasError('required')">
-          Contact Number is required
-        </mat-error>
-      </mat-form-field>
+    <!-- STATUS & DATE -->
+    <mat-form-field appearance="fill">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="active">Active</mat-option>
+        <mat-option value="inactive">Inactive</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Type</mat-label>
-        <mat-select formControlName="type">
-          <mat-option value="mobile">Mobile</mat-option>
-          <mat-option value="home">Home</mat-option>
-          <mat-option value="work">Work</mat-option>
-        </mat-select>
-        <mat-error *ngIf="contact.get('type')?.touched && contact.get('type')?.hasError('required')">
-          Contact Type is required
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <button mat-stroked-button color="primary" type="button" (click)="addContact()">+ Add Contact</button>
-  </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Created At</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="created_at" required />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
 
-  <!-- ADDRESSES -->
-  <h3>Addresses</h3>
-  <div formArrayName="addresses">
-    <div *ngFor="let address of addresses.controls; let i = index" [formGroupName]="i">
-      <mat-form-field appearance="fill">
-        <mat-label>City</mat-label>
-        <input matInput formControlName="city" />
-        <mat-error *ngIf="address.get('city')?.touched && address.get('city')?.hasError('required')">
-          City is required
-        </mat-error>
-      </mat-form-field>
+    <!-- CONTACTS -->
+    <h3>Contacts</h3>
+    <div formArrayName="contacts">
+      <div *ngFor="let contact of contacts.controls; let i = index" [formGroupName]="i" class="contact-item">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contact Number</mat-label>
+          <input matInput formControlName="value" maxlength="10" />
+        </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>State</mat-label>
-        <input matInput formControlName="state" />
-        <mat-error *ngIf="address.get('state')?.touched && address.get('state')?.hasError('required')">
-          State is required
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <button mat-stroked-button color="primary" type="button" (click)="addAddress()">+ Add Address</button>
-  </div>
-
-  <!-- PROFILES -->
-  <h3>Profiles</h3>
-  <div formArrayName="profiles">
-    <div *ngFor="let profile of profiles.controls; let pi = index" [formGroupName]="pi">
-      
-      <!-- Profile Type -->
-      <mat-form-field appearance="fill" formGroupName="profile_type">
-        <mat-label>Profile Type</mat-label>
-        <mat-select formControlName="id">
-          <mat-option *ngFor="let type of profileTypes" [value]="type.id">{{ type.name }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <!-- DOCUMENTS -->
-      <h4>Documents</h4>
-      <div formArrayName="documents">
-        <div *ngFor="let doc of getDocuments(pi).controls; let di = index" [formGroupName]="di">
-          <mat-form-field appearance="fill">
-            <mat-label>Document Name</mat-label>
-            <input matInput formControlName="name" />
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>URL</mat-label>
-            <input matInput formControlName="url" />
-          </mat-form-field>
-        </div>
-        <button mat-stroked-button color="primary" type="button" (click)="addDocument(pi)">+ Add Document</button>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Type</mat-label>
+          <mat-select formControlName="type">
+            <mat-option value="mobile">Mobile</mat-option>
+            <mat-option value="home">Home</mat-option>
+            <mat-option value="work">Work</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
-
-      <!-- COMPETITIONS -->
-      <h4>Competitions</h4>
-      <div formArrayName="competitions">
-        <div *ngFor="let comp of getCompetitions(pi).controls; let ci = index" [formGroupName]="ci">
-          <mat-form-field appearance="fill">
-            <mat-label>Competition Name</mat-label>
-            <input matInput formControlName="name" />
-          </mat-form-field>
-
-          <mat-form-field appearance="fill">
-            <mat-label>Level</mat-label>
-            <input matInput formControlName="level" />
-          </mat-form-field>
-        </div>
-        <button mat-stroked-button color="primary" type="button" (click)="addCompetition(pi)">+ Add Competition</button>
-      </div>
+      <button mat-stroked-button color="primary" type="button" (click)="addContact()">+ Add Contact</button>
     </div>
-    <button mat-raised-button color="primary" type="button" (click)="addProfile()">+ Add Profile</button>
+
+    <!-- ADDRESSES -->
+    <h3>Addresses</h3>
+    <div formArrayName="addresses">
+      <div *ngFor="let address of addresses.controls; let i = index" [formGroupName]="i">
+        <mat-form-field appearance="fill">
+          <mat-label>City</mat-label>
+          <input matInput formControlName="city" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>State</mat-label>
+          <input matInput formControlName="state" />
+        </mat-form-field>
+      </div>
+      <button mat-stroked-button color="primary" type="button" (click)="addAddress()">+ Add Address</button>
+    </div>
+
+    <!-- PROFILES -->
+    <h3>Profiles</h3>
+    <div formArrayName="profiles">
+      <div *ngFor="let profile of profiles.controls; let pi = index" [formGroupName]="pi">
+        <!-- Profile Type -->
+        <mat-form-field appearance="fill" formGroupName="profile_type">
+          <mat-label>Profile Type</mat-label>
+          <mat-select formControlName="id">
+            <mat-option *ngFor="let type of profileTypes" [value]="type.id">{{ type.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Documents -->
+        <h4>Documents</h4>
+        <div formArrayName="documents">
+          <div *ngFor="let doc of getDocuments(pi).controls; let di = index" [formGroupName]="di">
+            <mat-form-field appearance="fill">
+              <mat-label>Document Name</mat-label>
+              <input matInput formControlName="name" />
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>URL</mat-label>
+              <input matInput formControlName="url" />
+            </mat-form-field>
+          </div>
+          <button mat-stroked-button color="primary" type="button" (click)="addDocument(pi)">+ Add Document</button>
+        </div>
+
+        <!-- Competitions -->
+        <h4>Competitions</h4>
+        <div formArrayName="competitions">
+          <div *ngFor="let comp of getCompetitions(pi).controls; let ci = index" [formGroupName]="ci">
+            <mat-form-field appearance="fill">
+              <mat-label>Competition Name</mat-label>
+              <input matInput formControlName="name" />
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Level</mat-label>
+              <input matInput formControlName="level" />
+            </mat-form-field>
+          </div>
+          <button mat-stroked-button color="primary" type="button" (click)="addCompetition(pi)">+ Add Competition</button>
+        </div>
+      </div>
+      <button mat-raised-button color="primary" type="button" (click)="addProfile()">+ Add Profile</button>
+    </div>
   </div>
 
-  <!-- SUBMIT -->
-  <button mat-raised-button color="primary" type="submit">Submit</button>
+  <!-- SUBMIT BUTTON -->
+  <button mat-raised-button color="primary" type="submit">
+    {{ mode === 'register' ? 'Register' : 'Submit' }}
+  </button>
 </form>

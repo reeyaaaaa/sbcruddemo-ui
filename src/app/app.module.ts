@@ -30,6 +30,10 @@ import { ContactComponent } from './components/contact/contact.component';
 import { AddressComponent } from './components/address/address.component';
 import { CompetitionComponent } from './components/competition/competition.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { LoginComponent } from './components/login/login.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { PersonComponent } from './components/person/person.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'persons', pathMatch: 'full' },
@@ -52,7 +56,10 @@ const routes: Routes = [
    ContactComponent,
    AddressComponent,
    CompetitionComponent,
-   ProfileComponent
+   ProfileComponent,
+   LoginComponent,
+   DashboardComponent,
+   PersonComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +76,9 @@ const routes: Routes = [
     MatTableModule,
     MatSelectModule,
     MatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatToolbarModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

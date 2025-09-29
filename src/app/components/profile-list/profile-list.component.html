@@ -1,12 +1,36 @@
-<div *ngIf="profiles?.length; else noProfiles">
-  <ng-container *ngFor="let profile of profiles; let i = index">
-    <app-profile [profile]="profile"></app-profile>
-    <!-- optional separator between profiles -->
-    <span *ngIf="i < profiles.length - 1"> | </span>
-  </ng-container>
+<div *ngFor="let profile of profiles" class="profile-card">
+
+  <!-- Role -->
+  <p><strong>Role:</strong> {{ profile.profile_type?.name || 'N/A' }}</p>
+
+  <!-- Competitions -->
+  <div *ngIf="profile.competitions?.length">
+    <p><strong>Competitions:</strong></p>
+
+    <!-- If only 1 competition   --> 
+    <ng-container *ngIf="profile.competitions.length === 1; else multipleComps">
+      <app-competition [competition]="profile.competitions[0]"></app-competition>
+    </ng-container>
+
+    <!-- If more than 1 -->
+    <ng-template #multipleComps>
+      <app-competition-list [competitions]="profile.competitions"></app-competition-list>
+    </ng-template>
+  </div>
+
+  <!-- Documents -->
+  <div *ngIf="profile.document?.length">
+    <p><strong>Documents:</strong></p>
+
+    <!-- If only 1 document -->
+    <ng-container *ngIf="profile.document.length === 1; else multipleDocs">
+      <app-document [document]="profile.document[0]"></app-document>
+    </ng-container>
+
+    <!-- If more than 1 -->
+    <ng-template #multipleDocs>
+      <app-document-list [documents]="profile.document"></app-document-list>
+    </ng-template>
+  </div>
+
 </div>
-
-
-<ng-template #noProfiles>
-  <span class="empty-text">No profiles available</span>
-</ng-template>

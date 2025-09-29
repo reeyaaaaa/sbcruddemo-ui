@@ -8,11 +8,25 @@
 
 
 
-
+<!-- 
 <ul *ngIf="documents && documents.length > 0">
   <app-document *ngFor="let doc of documents" [document]="doc"></app-document>
 </ul>
 
 <span *ngIf="!documents || documents.length === 0">
   No documents.
-</span>
+</span> -->
+
+
+
+<!-- document-list.component.html -->
+<div *ngIf="documents && documents.length > 0; else noDocs" class="document-thumbs">
+  <div *ngFor="let doc of documents" class="doc-thumb">
+    <img *ngIf="doc.url" [src]="doc.url" alt="{{ doc.title }}" class="doc-thumb-img" />
+    <p>{{ doc.title }}</p>
+  </div>
+</div>
+
+<ng-template #noDocs>
+  <span>No documents.</span>
+</ng-template>
